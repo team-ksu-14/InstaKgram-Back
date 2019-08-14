@@ -1,26 +1,39 @@
 package me.instakgram.boot.post;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import me.instakgram.boot.member.Member;
 
+import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-@Data
-@Builder
-@AllArgsConstructor
+@Getter @Setter
 @NoArgsConstructor
-public class Post {
+@Entity @Table
+public class Post implements Serializable {
 
+    @Id
+    @Column
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idx;
 
-    private String desc;
+    @Column
+    private String contents;
 
+    @Column
     private String imageUrl;
 
+    @Column
     private LocalDateTime createdDate;
 
+    @OneToOne(fetch = FetchType.LAZY)
     private Member member;
+
+    @Builder
+    public Post(String contents, String imageUrl, LocalDateTime createdDate, Member member) {
+        this.contents = contents;
+        this.imageUrl = imageUrl;
+        this.createdDate = createdDate;
+        this.member = member;
+    }
 }
