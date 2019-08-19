@@ -17,13 +17,13 @@ public class Post implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idx;
 
-    @Column
+    @Column(nullable = false)
     private String contents;
 
-    @Column
+    @Column(nullable = false)
     private String imageUrl;
 
-    @Column
+    @Column(nullable = false)
     private LocalDateTime createdDate;
 
     @OneToOne(fetch = FetchType.LAZY)
