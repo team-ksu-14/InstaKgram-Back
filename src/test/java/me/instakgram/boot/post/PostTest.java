@@ -13,7 +13,7 @@ public class PostTest {
     public void post_초기_테스트(){
 
         Post post = Post.builder()
-                .desc("내용")
+                .contents("내용")
                 .imageUrl("https://~")
                 .createdDate(LocalDateTime.now())
                 .member(new Member())
