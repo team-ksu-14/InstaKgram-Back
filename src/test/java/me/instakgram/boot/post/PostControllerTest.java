@@ -11,6 +11,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -26,17 +27,24 @@ public class PostControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
+    private final String url = "/api/posts";
+
     @Test
     public void 게시물등록_테스트() throws Exception {
         PostRegisterDto postRegisterDto = new PostRegisterDto();
         postRegisterDto.setContents("내용");
         postRegisterDto.setImageUrl("https://~");
 
-        mockMvc.perform(post("/api/posts")
+        mockMvc.perform(post(url)
                 .content(objectMapper.writeValueAsString(postRegisterDto)).with(csrf())
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated())
                 .andDo(print());
+    }
 
+    @Test
+    public void 게시물조회_테스트() throws Exception {
+        mockMvc.perform(get(url))
+                .andDo(print());
     }
 }

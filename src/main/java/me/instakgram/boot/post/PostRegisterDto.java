@@ -1,9 +1,6 @@
 package me.instakgram.boot.post;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
@@ -18,6 +15,12 @@ public class PostRegisterDto {
 
     @NotBlank
     private String imageUrl;
+
+    @Builder
+    public PostRegisterDto(String contents, String imageUrl) {
+        this.contents = contents;
+        this.imageUrl = imageUrl;
+    }
 
     public Post toEntity() {
         Post post = new Post();
