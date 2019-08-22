@@ -37,7 +37,7 @@ public class Member implements Serializable {
     @Column
     private String introduce;
 
-    @Column
+    @Column(nullable = false)
     private LocalDateTime createdDate;
 
     @Builder
