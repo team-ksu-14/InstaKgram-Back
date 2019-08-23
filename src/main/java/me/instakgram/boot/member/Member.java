@@ -1,7 +1,8 @@
 package me.instakgram.boot.member;
 
 import lombok.*;
-import me.instakgram.boot.follow.Follow;
+import me.instakgram.boot.follow.Follower;
+import me.instakgram.boot.follow.Following;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -43,8 +44,11 @@ public class Member implements Serializable {
     @Column
     private LocalDateTime createdDate;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "member")
-    private List<Follow> followList = new ArrayList<>();
+    @OneToMany
+    private List<Follower> followers = new ArrayList<>();
+
+    @OneToMany
+    private List<Following> followings = new ArrayList<>();
 
     @Builder
     public Member(String name, String email, String password, String profileImageUrl, String nickname, String website, String introduce, LocalDateTime createdDate) {
@@ -58,8 +62,4 @@ public class Member implements Serializable {
         this.createdDate = createdDate;
     }
 
-    public void add(Follow follow) {
-        follow.setMember(this);
-        this.followList.add(follow);
-    }
 }

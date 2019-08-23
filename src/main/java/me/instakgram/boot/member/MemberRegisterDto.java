@@ -1,9 +1,6 @@
 package me.instakgram.boot.member;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -26,6 +23,14 @@ public class MemberRegisterDto {
 
     @NotBlank
     private String password;
+
+    @Builder
+    public MemberRegisterDto(@NotBlank @Email String email, @NotBlank String name, @NotBlank String nickname, @NotBlank String password) {
+        this.email = email;
+        this.name = name;
+        this.nickname = nickname;
+        this.password = password;
+    }
 
     public Member toEntity() {
         Member member = new Member();
