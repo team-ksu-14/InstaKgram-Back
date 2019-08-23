@@ -24,7 +24,7 @@ public class MemberRegisterDto {
     @NotBlank
     private String password;
 
-    public MemberRegisterDto(@NotBlank @Email String email, @NotBlank String name, @NotBlank String nickname, @NotBlank String password) {
+    public MemberRegisterDto(String email, String name, String nickname, String password) {
         this.email = email;
         this.name = name;
         this.nickname = nickname;
