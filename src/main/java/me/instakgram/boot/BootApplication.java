@@ -16,16 +16,4 @@ public class BootApplication {
         SpringApplication.run(BootApplication.class, args);
     }
 
-    @Bean
-    public CommandLineRunner runner(MemberService memberService) {
-        return args -> {
-            IntStream.rangeClosed(1, 10).forEach(index -> memberService.save(MemberRegisterDto.builder()
-                .name("user" + index)
-                .nickname("user" + index + "name")
-                .email("user" + index + "@gmail.com")
-                .password("user" + index)
-                .build()));
-        };
-    }
-
 }
