@@ -1,6 +1,9 @@
 package me.instakgram.boot.member;
 
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -40,8 +43,11 @@ public class Member implements Serializable {
     @Column(nullable = false)
     private LocalDateTime createdDate;
 
+    @Column
+    private LocalDateTime updatedDate;
+
     @Builder
-    public Member(String name, String email, String password, String profileImageUrl, String nickname, String website, String introduce, LocalDateTime createdDate) {
+    public Member(String name, String email, String password, String profileImageUrl, String nickname, String website, String introduce, LocalDateTime createdDate, LocalDateTime updatedDate) {
         this.name = name;
         this.email = email;
         this.password = password;
@@ -50,5 +56,17 @@ public class Member implements Serializable {
         this.website = website;
         this.introduce = introduce;
         this.createdDate = createdDate;
+        this.updatedDate = updatedDate;
+    }
+
+    public Member update(MemberUpdateDto memberUpdateDto) {
+        this.email = memberUpdateDto.getEmail() == null ? this.email : memberUpdateDto.getEmail();
+        this.name = memberUpdateDto.getName() == null ? this.name : memberUpdateDto.getName();
+        this.nickname = memberUpdateDto.getNickname() == null ? this.nickname : memberUpdateDto.getNickname();
+        this.profileImageUrl = memberUpdateDto.getProfileImageUrl() == null ? this.profileImageUrl : memberUpdateDto.getProfileImageUrl();
+        this.website = memberUpdateDto.getWebsite() == null ? this.website : memberUpdateDto.getWebsite();
+        this.introduce = memberUpdateDto.getIntroduce() == null ? this.introduce : memberUpdateDto.getIntroduce();
+        this.updatedDate = LocalDateTime.now();
+        return this;
     }
 }

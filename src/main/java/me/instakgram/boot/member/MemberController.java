@@ -22,4 +22,14 @@ public class MemberController {
     public ResponseEntity<?> registerMember(@RequestBody MemberRegisterDto memberRegisterDto){
         return new ResponseEntity<>(memberService.save(memberRegisterDto), HttpStatus.CREATED);
     }
+
+    @PutMapping("/{idx}")
+    public ResponseEntity<?> updateMember(@PathVariable("idx") Long idx, @RequestBody MemberUpdateDto memberUpdateDto){
+        return new ResponseEntity<>(memberService.updateMember(idx, memberUpdateDto), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/{idx}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getMember(@PathVariable("idx") Long idx){
+        return ResponseEntity.ok(memberService.getMember(idx));
+    }
 }
