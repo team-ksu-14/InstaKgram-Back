@@ -7,9 +7,4 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class FollowingService {
 
-    private final FollowingRepository followingRepository;
-
-    public Following save(FollowingDto followingDto) {
-        return followingRepository.save(followingDto.toEntity());
-    }
 }

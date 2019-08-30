@@ -1,7 +1,5 @@
 package me.instakgram.boot.member;
 
-import me.instakgram.boot.follow.Follower;
-import me.instakgram.boot.follow.Following;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -47,15 +45,10 @@ public class Member implements Serializable {
     @Column(nullable = false)
     private LocalDateTime createdDate;
 
-    @OneToMany
-    private List<Follower> followers = new ArrayList<>();
-
-    @OneToMany
-    private List<Following> followings = new ArrayList<>();
     @Column
     private LocalDateTime updatedDate;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "FOLLOW",
                 joinColumns = @JoinColumn(name = "idx"),
                 inverseJoinColumns = @JoinColumn(name = "followers_idx"))
