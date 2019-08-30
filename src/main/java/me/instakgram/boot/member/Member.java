@@ -8,6 +8,8 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter @Setter
 @NoArgsConstructor
@@ -45,6 +47,12 @@ public class Member implements Serializable {
 
     @Column
     private LocalDateTime updatedDate;
+
+    @ManyToMany
+    @JoinTable(name = "FOLLOW",
+                joinColumns = @JoinColumn(name = "idx"),
+                inverseJoinColumns = @JoinColumn(name = "followers_idx"))
+    private List<Member> followers = new ArrayList<>();
 
     @Builder
     public Member(String name, String email, String password, String profileImageUrl, String nickname, String website, String introduce, LocalDateTime createdDate, LocalDateTime updatedDate) {
