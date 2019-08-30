@@ -55,6 +55,12 @@ public class Member implements Serializable {
     @Column
     private LocalDateTime updatedDate;
 
+    @ManyToMany
+    @JoinTable(name = "FOLLOW",
+                joinColumns = @JoinColumn(name = "idx"),
+                inverseJoinColumns = @JoinColumn(name = "followers_idx"))
+    private List<Member> followers = new ArrayList<>();
+
     @Builder
     public Member(String name, String email, String password, String profileImageUrl, String nickname, String website, String introduce, LocalDateTime createdDate, LocalDateTime updatedDate) {
         this.name = name;
