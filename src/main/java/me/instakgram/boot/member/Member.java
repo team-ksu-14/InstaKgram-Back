@@ -48,7 +48,7 @@ public class Member implements Serializable {
     @Column
     private LocalDateTime updatedDate;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "FOLLOW",
                 joinColumns = @JoinColumn(name = "idx"),
                 inverseJoinColumns = @JoinColumn(name = "followers_idx"))
@@ -77,4 +77,5 @@ public class Member implements Serializable {
         this.updatedDate = LocalDateTime.now();
         return this;
     }
+
 }
