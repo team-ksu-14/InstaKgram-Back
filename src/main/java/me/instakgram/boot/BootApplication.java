@@ -1,5 +1,6 @@
 package me.instakgram.boot;
 
+import me.instakgram.boot.member.Member;
 import me.instakgram.boot.member.MemberRegisterDto;
 import me.instakgram.boot.member.MemberService;
 import me.instakgram.boot.post.PostRegisterDto;
